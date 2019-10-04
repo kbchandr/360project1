@@ -8,10 +8,10 @@ using namespace std;
 int main()
 {
 	// hyper-paramters
-	double alpha = 0.1;   // learning rate
-	size_t inputLayerSize = 2;
-	size_t hiddenLayerSize = 5;
-	size_t numEpochs = 10000;
+	double alpha = 0.7;   // learning rate --> bigger steps
+	size_t inputLayerSize = 2; 
+	size_t hiddenLayerSize = 10; // larger layersize means differentiating more
+	size_t numEpochs = 7000; //time and accuracy
 
 	int seed = 0; // random seed for the network initialization
 
