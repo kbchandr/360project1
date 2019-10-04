@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/cs104/Documents/360project1/code/task3/MNIST_reader.h
+math.h
+-
+fstream
+-
+iostream
+-
+vector
+-
+
+/home/cs104/Documents/360project1/code/task3/main.cpp
+vector
+-
+iostream
+-
+MNIST_reader.h
+/home/cs104/Documents/360project1/code/task3/MNIST_reader.h
+

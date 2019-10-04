@@ -76,4 +76,12 @@ void loadMnistLabels(const string& filename, vector< int > &labels)
 	}
 }
 
+void scaleIntensity(vector< vector< int > > &images, vector< vector< double > > &scaledImages){
+	for(int i = 0; i < images.size(); i++){
+		for(int j = 0; j < images[0].size(); j++){
+			scaledImages[i][j] = images[i][j]/255.0;
+		}
+	}	
+}
+
 
