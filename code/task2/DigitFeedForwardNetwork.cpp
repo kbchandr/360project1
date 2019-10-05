@@ -13,7 +13,7 @@ void DigitFeedForwardNetwork::initialize(int seed)
 	layerWeights[0].resize(inputLayerSize);
 	for (size_t i = 0; i < inputLayerSize; i++)
 	{
-		inputHiddenLayerWeights[0][i].resize(hiddenLayerSize);
+		layerWeights[0][i].resize(hiddenLayerSize);
 		for (size_t j = 0; j < hiddenLayerSize; j++)
 		{
 			layerWeights[0][i][j] = (rand() % 101 - 50) * 1.0 / 100; 	// This network cannot learn if the initial weights are set to zero.
@@ -40,7 +40,7 @@ void DigitFeedForwardNetwork::initialize(int seed)
 	layerWeights[numHiddenLayers].resize(hiddenLayerSize);
 	for (size_t i = 0; i < hiddenLayerSize; i++)
 	{
-		inputHiddenLayerWeights[numHiddenLayers][i].resize(outputSize);
+		layerWeights[numHiddenLayers][i].resize(outputSize);
 		for (size_t j = 0; j < outputSize; j++)
 		{
 			layerWeights[numHiddenLayers][i][j] = (rand() % 101 - 50) * 1.0 / 100; 	// This network cannot learn if the initial weights are set to zero.
@@ -69,7 +69,7 @@ void DigitFeedForwardNetwork::train(const vector< vector< double > >& x,
 			}
 			
 			vector< vector< double > > activationHidden; //[layer][node] = input
-			activationHidden.resize(numHiddenLayers+1);
+			activationHidden.resize(numHiddenLayers);
 			vector< double > inputHidden(hiddenLayerSize);
 			// calculate activations of hidden layers (for now, just one hidden layer)
 			
@@ -80,7 +80,7 @@ void DigitFeedForwardNetwork::train(const vector< vector< double > >& x,
 				double inputToHidden = 0;
 				for (size_t inputNode = 0; inputNode < inputLayerSize; inputNode++)
 				{
-					inputToHidden += inputHiddenLayerWeights[0][inputNode][hiddenNode] * activationInput[inputNode];
+					inputToHidden += layerWeights[0][inputNode][hiddenNode] * activationInput[inputNode];
 				}
 				activationHidden[0][hiddenNode] = g(inputToHidden);
 			}
@@ -94,7 +94,7 @@ void DigitFeedForwardNetwork::train(const vector< vector< double > >& x,
 					double inputToHidden = 0;
 					for (size_t inputNode = 0; inputNode < hiddenLayerSize; inputNode++)
 					{
-						inputToHidden += inputHiddenLayerWeights[hiddenLayer][inputNode][hiddenNode] * activationHidden[hiddenLayer-1][inputNode];
+						inputToHidden += layerWeights[hiddenLayer][inputNode][hiddenNode] * activationHidden[hiddenLayer-1][inputNode];
 					}
 					activationHidden[hiddenLayer][hiddenNode] = g(inputToHidden);
 				}
@@ -102,42 +102,48 @@ void DigitFeedForwardNetwork::train(const vector< vector< double > >& x,
 			}
 
 			// output node.
-			double inputAtOutput = 0;
-			for (size_t hiddenNode = 0; hiddenNode < hiddenLayerSize; hiddenNode++)
-			{
-				inputAtOutput += hiddenLayerWeights[hiddenNode] * activationHidden[hiddenNode];
-			}
-			double activationOutput = g(inputAtOutput);
-			cout << " " << std::setprecision(2) << activationOutput;
-
-			
-			// calculating errors
-			double errorOfOutputNode = gprime(activationOutput) * (y[example] - activationOutput);
-
-			// Calculating error of hidden layer. Special calculation since we only have one output node; i.e. no summation over next layer nodes
-			// Also adjusting weights of output layer
-			vector< double > errorOfHiddenNode(hiddenLayerSize);
-			for (size_t hiddenNode = 0; hiddenNode < hiddenLayerSize; hiddenNode++)
-			{
-				errorOfHiddenNode[hiddenNode] = hiddenLayerWeights[hiddenNode] * errorOfOutputNode;
-				errorOfHiddenNode[hiddenNode] *= gprime(activationHidden[hiddenNode]);
-			}
-
-			//adjusting weights
-			//adjusting weights at output layer
-			for (size_t hiddenNode = 0; hiddenNode < hiddenLayerSize; hiddenNode++)
-			{
-				hiddenLayerWeights[hiddenNode] += alpha * activationHidden[hiddenNode] * errorOfOutputNode;
-			}
-
-			// Adjusting weights at hidden layer.
-			for (size_t inputNode = 0; inputNode < inputLayerSize; inputNode++)
-			{
+			vector <double> output(outputSize);
+			for(size_t outputNode = 0; outputNode < outputSize; output++){
+				double inputAtOutput = 0;
 				for (size_t hiddenNode = 0; hiddenNode < hiddenLayerSize; hiddenNode++)
 				{
-					inputHiddenLayerWeights[inputNode][hiddenNode] += alpha * activationInput[inputNode] * errorOfHiddenNode[hiddenNode];
+					inputAtOutput += layerWeights[numHiddenLayers][hiddenNode][outputNode] * activationHidden[numHiddenLayers-1][hiddenNode];
 				}
+				output[outputNode] = g(inputAtOutput);
 			}
+
+
+			for(size_t i: output)
+				cout << " " << std::setprecision(2) << output[i];
+
+
+			// // calculating errors
+			// double errorOfOutputNode = gprime(activationOutput) * (y[example] - activationOutput);
+
+			// // Calculating error of hidden layer. Special calculation since we only have one output node; i.e. no summation over next layer nodes
+			// // Also adjusting weights of output layer
+			// vector< double > errorOfHiddenNode(hiddenLayerSize);
+			// for (size_t hiddenNode = 0; hiddenNode < hiddenLayerSize; hiddenNode++)
+			// {
+			// 	errorOfHiddenNode[hiddenNode] = hiddenLayerWeights[hiddenNode] * errorOfOutputNode;
+			// 	errorOfHiddenNode[hiddenNode] *= gprime(activationHidden[hiddenNode]);
+			// }
+
+			// //adjusting weights
+			// //adjusting weights at output layer
+			// for (size_t hiddenNode = 0; hiddenNode < hiddenLayerSize; hiddenNode++)
+			// {
+			// 	hiddenLayerWeights[hiddenNode] += alpha * activationHidden[hiddenNode] * errorOfOutputNode;
+			// }
+
+			// // Adjusting weights at hidden layer.
+			// for (size_t inputNode = 0; inputNode < inputLayerSize; inputNode++)
+			// {
+			// 	for (size_t hiddenNode = 0; hiddenNode < hiddenLayerSize; hiddenNode++)
+			// 	{
+			// 		inputHiddenLayerWeights[inputNode][hiddenNode] += alpha * activationInput[inputNode] * errorOfHiddenNode[hiddenNode];
+			// 	}
+			// }
 		}
 		cout << endl;
 	}

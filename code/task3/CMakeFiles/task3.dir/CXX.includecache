@@ -6,6 +6,22 @@
 
 #IncludeRegexTransform: 
 
+/home/cs104/Documents/360project1/code/task3/DigitFeedForwardNetwork.cpp
+DigitFeedForwardNetwork.h
+/home/cs104/Documents/360project1/code/task3/DigitFeedForwardNetwork.h
+iostream
+-
+random
+-
+iomanip
+-
+
+/home/cs104/Documents/360project1/code/task3/DigitFeedForwardNetwork.h
+math.h
+-
+vector
+-
+
 /home/cs104/Documents/360project1/code/task3/MNIST_reader.h
 math.h
 -
@@ -23,4 +39,6 @@ iostream
 -
 MNIST_reader.h
 /home/cs104/Documents/360project1/code/task3/MNIST_reader.h
+DigitFeedForwardNetwork.h
+/home/cs104/Documents/360project1/code/task3/DigitFeedForwardNetwork.h
 

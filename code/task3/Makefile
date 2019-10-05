@@ -123,6 +123,33 @@ task3/fast:
 	$(MAKE) -f CMakeFiles/task3.dir/build.make CMakeFiles/task3.dir/build
 .PHONY : task3/fast
 
+DigitFeedForwardNetwork.o: DigitFeedForwardNetwork.cpp.o
+
+.PHONY : DigitFeedForwardNetwork.o
+
+# target to build an object file
+DigitFeedForwardNetwork.cpp.o:
+	$(MAKE) -f CMakeFiles/task3.dir/build.make CMakeFiles/task3.dir/DigitFeedForwardNetwork.cpp.o
+.PHONY : DigitFeedForwardNetwork.cpp.o
+
+DigitFeedForwardNetwork.i: DigitFeedForwardNetwork.cpp.i
+
+.PHONY : DigitFeedForwardNetwork.i
+
+# target to preprocess a source file
+DigitFeedForwardNetwork.cpp.i:
+	$(MAKE) -f CMakeFiles/task3.dir/build.make CMakeFiles/task3.dir/DigitFeedForwardNetwork.cpp.i
+.PHONY : DigitFeedForwardNetwork.cpp.i
+
+DigitFeedForwardNetwork.s: DigitFeedForwardNetwork.cpp.s
+
+.PHONY : DigitFeedForwardNetwork.s
+
+# target to generate assembly for a file
+DigitFeedForwardNetwork.cpp.s:
+	$(MAKE) -f CMakeFiles/task3.dir/build.make CMakeFiles/task3.dir/DigitFeedForwardNetwork.cpp.s
+.PHONY : DigitFeedForwardNetwork.cpp.s
+
 main.o: main.cpp.o
 
 .PHONY : main.o
@@ -159,6 +186,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... task3"
+	@echo "... DigitFeedForwardNetwork.o"
+	@echo "... DigitFeedForwardNetwork.i"
+	@echo "... DigitFeedForwardNetwork.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

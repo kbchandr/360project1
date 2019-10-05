@@ -20,8 +20,8 @@ private:
 
 	double alpha;
 	size_t hiddenLayerSize;
-	size_t inputLayerSize;
 	size_t numHiddenLayers;
+	size_t inputLayerSize;
 	size_t outputSize;
 
 	inline double g(double x) {return 1.0 / (1.0 + exp(-x)); }
