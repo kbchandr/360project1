@@ -6,29 +6,44 @@
 void DigitFeedForwardNetwork::initialize(int seed)
 {
 	srand(seed);
-	inputHiddenLayerWeights.resize(inputLayerSize);
+
+	layerWeights.resize(numHiddenLayers+1); //num of layers with weights
+
+	//input to first hidden layer
+	layerWeights[0].resize(inputLayerSize);
 	for (size_t i = 0; i < inputLayerSize; i++)
 	{
-		inputHiddenLayerWeights[i].resize(hiddenLayerSize);
+		inputHiddenLayerWeights[0][i].resize(hiddenLayerSize);
 		for (size_t j = 0; j < hiddenLayerSize; j++)
 		{
-			inputHiddenLayerWeights[i][j] = (rand() % 100 + 1) * 1.0 / 100; 	// This network cannot learn if the initial weights are set to zero.
+			layerWeights[0][i][j] = (rand() % 101 - 50) * 1.0 / 100; 	// This network cannot learn if the initial weights are set to zero.
 		}
 	}
 
-	hiddenLayerWeights.resize(hiddenLayerSize);
-	for(size_t i = 0; i < numHiddenLayers; i++){
-		for (size_t j = 0; j < hiddenLayerSize; j++)
-		{
-			hiddenLayerWeights[i][j] = (rand() % 100 + 1) * 1.0 / 100; 	// This network cannot learn if the initial weights are set to zero.
+
+
+	//weights between hiddenlayers
+	for(size_t i = 1; i < numHiddenLayers; i++){
+		layerWeights[i].resize(hiddenLayerSize);
+		for(int j = 0; j < hiddenLayerSize; j = 0){
+			layerWeights[i][j].resize(hiddenLayerSize);
+			for (size_t k = 0; k < hiddenLayerSize; k++)
+			{
+				layerWeights[i][j][k] = (rand() % 101 - 50) * 1.0 / 100; 	// This network cannot learn if the initial weights are set to zero.
+			}
+
 		}
 	}
 
-	outputLayerWeights.resize(hiddenLayerSize);
-	for(size_t i = 0; i < hiddenLayerSize; i++){
-		for (size_t j = 0; j < 10; j++)
+
+	//weight from last hl to output layer
+	layerWeights[numHiddenLayers].resize(hiddenLayerSize);
+	for (size_t i = 0; i < hiddenLayerSize; i++)
+	{
+		inputHiddenLayerWeights[numHiddenLayers][i].resize(outputSize);
+		for (size_t j = 0; j < outputSize; j++)
 		{
-			hiddenLayerWeights[i][j] = (rand() % 100 + 1) * 1.0 / 100; 	// This network cannot learn if the initial weights are set to zero.
+			layerWeights[numHiddenLayers][i][j] = (rand() % 101 - 50) * 1.0 / 100; 	// This network cannot learn if the initial weights are set to zero.
 		}
 	}
 }
@@ -52,19 +67,41 @@ void DigitFeedForwardNetwork::train(const vector< vector< double > >& x,
 			{
 				activationInput[inputNode] = x[example][inputNode];
 			}
-			vector< double > activationHidden(hiddenLayerSize);
+			
+			vector< vector< double > > activationHidden; //[layer][node] = input
+			activationHidden.resize(numHiddenLayers+1);
+			vector< double > inputHidden(hiddenLayerSize);
 			// calculate activations of hidden layers (for now, just one hidden layer)
+			
+			//input layer to first hidden layer
+			activationHidden[0].resize(hiddenLayerSize);
 			for (size_t hiddenNode = 0; hiddenNode < hiddenLayerSize; hiddenNode++)
 			{
 				double inputToHidden = 0;
 				for (size_t inputNode = 0; inputNode < inputLayerSize; inputNode++)
 				{
-					inputToHidden += inputHiddenLayerWeights[inputNode][hiddenNode] * activationInput[inputNode];
+					inputToHidden += inputHiddenLayerWeights[0][inputNode][hiddenNode] * activationInput[inputNode];
 				}
-				activationHidden[hiddenNode] = g(inputToHidden);
+				activationHidden[0][hiddenNode] = g(inputToHidden);
 			}
 
-			// one output node.
+			//between hiddenlayers
+			for(size_t hiddenLayer = 1; hiddenLayer < numHiddenLayers; hiddenLayer++){
+				activationHidden[hiddenLayer].resize(hiddenLayerSize);
+
+				for (size_t hiddenNode = 0; hiddenNode < hiddenLayerSize; hiddenNode++)
+				{
+					double inputToHidden = 0;
+					for (size_t inputNode = 0; inputNode < hiddenLayerSize; inputNode++)
+					{
+						inputToHidden += inputHiddenLayerWeights[hiddenLayer][inputNode][hiddenNode] * activationHidden[hiddenLayer-1][inputNode];
+					}
+					activationHidden[hiddenLayer][hiddenNode] = g(inputToHidden);
+				}
+				
+			}
+
+			// output node.
 			double inputAtOutput = 0;
 			for (size_t hiddenNode = 0; hiddenNode < hiddenLayerSize; hiddenNode++)
 			{
@@ -72,6 +109,8 @@ void DigitFeedForwardNetwork::train(const vector< vector< double > >& x,
 			}
 			double activationOutput = g(inputAtOutput);
 			cout << " " << std::setprecision(2) << activationOutput;
+
+			
 			// calculating errors
 			double errorOfOutputNode = gprime(activationOutput) * (y[example] - activationOutput);
 

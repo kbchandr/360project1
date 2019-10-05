@@ -32,7 +32,7 @@ int main()
 	// loadMnistLabels(filename, training_labels);
 	// cout << "Number of labels: " << training_labels.size() << endl;
 
-	DigitFeedForwardNetwork nn(alpha, hiddenLayerSize, numHiddenLayers, inputLayerSize);
+	DigitFeedForwardNetwork nn(alpha, hiddenLayerSize, numHiddenLayers, inputLayerSize, outputSize);
 	nn.initialize(seed);
 	nn.train(x, y, numEpochs);
 
