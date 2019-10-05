@@ -21,7 +21,7 @@ void DigitFeedForwardNetwork::initialize(int seed)
 	}
 
 
-
+cout << "1";
 	//weights between hiddenlayers
 	for(size_t i = 1; i < numHiddenLayers; i++){
 		layerWeights[i].resize(hiddenLayerSize);
@@ -34,7 +34,7 @@ void DigitFeedForwardNetwork::initialize(int seed)
 
 		}
 	}
-
+cout << "2";
 
 	//weight from last hl to output layer
 	layerWeights[numHiddenLayers].resize(hiddenLayerSize);
@@ -46,6 +46,7 @@ void DigitFeedForwardNetwork::initialize(int seed)
 			layerWeights[numHiddenLayers][i][j] = (rand() % 101 - 50) * 1.0 / 100; 	// This network cannot learn if the initial weights are set to zero.
 		}
 	}
+	cout <<"3";
 }
 
 void DigitFeedForwardNetwork::train(const vector< vector< double > >& x,

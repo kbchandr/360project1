@@ -12,7 +12,7 @@ public:
 	void train(const vector< vector< double > >& x,
 		const vector< double >& y, size_t numEpochs);
 
-	DigitFeedForwardNetwork(double alpha, size_t hiddenLayerSize, size_t numHiddenLayers, size_t inputLayerSize, size_t outputSize) :
+	DigitFeedForwardNetwork(double alpha, size_t hiddenLayerSize, size_t numHiddenLayers, size_t inputLayerSize, size_t outputSize):
 		alpha(alpha), hiddenLayerSize(hiddenLayerSize), numHiddenLayers(numHiddenLayers), inputLayerSize(inputLayerSize), outputSize(outputSize) {}
 
 private:

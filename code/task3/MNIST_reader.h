@@ -37,7 +37,7 @@ void loadMnistImages(const string& filename, vector< vector< int > > &images)
 		file.read((char*)&n_cols, sizeof(n_cols));
 		n_cols = reverseInt(n_cols);
 
-		images.resize(number_of_images);
+		images.resize(10);
 		for (int i = 0; i < 10; ++i)
 		{
 			images[i].resize(n_rows * n_cols);
@@ -66,7 +66,7 @@ void loadMnistLabels(const string& filename, vector< int > &labels)
 		file.read((char*)&number_of_items, sizeof(number_of_items));
 		number_of_items = reverseInt(number_of_items);
 
-		labels.resize(number_of_items);
+		labels.resize(10);
 		for (int i = 0; i < 10; ++i)
 		{
 			unsigned char label = 0;
@@ -77,7 +77,9 @@ void loadMnistLabels(const string& filename, vector< int > &labels)
 }
 
 void scaleIntensity(vector< vector< int > > &images, vector< vector< double > > &scaledImages){
+	scaledImages.resize(images.size());
 	for(size_t i = 0; i < images.size(); i++){
+		scaledImages[i].resize(images[0].size());
 		for(size_t j = 0; j < images[0].size(); j++){
 			scaledImages[i][j] = images[i][j]/255.0;
 		}

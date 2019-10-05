@@ -21,22 +21,25 @@ int main()
 	vector <vector< int > > training_images;
 	vector <vector< double > > scaled_training;
 	loadMnistImages(filename, training_images);
-	// cout << "Number of images: " << training_images.size() << endl;
-	// cout << "Image size: " << training_images[0].size() << endl;
+	cout << "Number of images: " << training_images.size() << endl;
+	cout << "Image size: " << training_images[0].size() << endl;
 
 	//scale
 	scaleIntensity(training_images, scaled_training);
 
-
+	cout << "Number of images: " << scaled_training.size() << endl;
+	cout << "Image size: " << scaled_training[0].size() << endl;
 	filename = "train-labels.idx1-ubyte";
 	//load MNIST labels
+
 	vector<int> training_labels;
+	loadMnistLabels(filename, training_labels);
 	vector<double> double_labels(training_labels.begin(), training_labels.end());
 
-	// loadMnistLabels(filename, training_labels);
-	// cout << "Number of labels: " << training_labels.size() << endl;
+	cout << "Number of labels: " << double_labels.size() << endl;
 
 	DigitFeedForwardNetwork nn(alpha, hiddenLayerSize, numHiddenLayers, inputLayerSize, outputSize);
+	cout << "here";
 	nn.initialize(seed);
 	nn.train(scaled_training, double_labels, numEpochs);
 
