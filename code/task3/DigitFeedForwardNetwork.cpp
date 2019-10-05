@@ -5,11 +5,9 @@
 
 void DigitFeedForwardNetwork::initialize(int seed)
 {
-	cout <<"hello";
 	srand(seed);
 
 	layerWeights.resize(numHiddenLayers+1); //num of layers with weights
-cout << "what";
 	//input to first hidden layer
 	layerWeights[0].resize(inputLayerSize);
 	for (size_t i = 0; i < inputLayerSize; i++)
@@ -22,11 +20,10 @@ cout << "what";
 	}
 
 
-	cout << "1";
-	//weights between hiddenlayers
+	// //weights between hiddenlayers
 	for(size_t i = 1; i < numHiddenLayers; i++){
 		layerWeights[i].resize(hiddenLayerSize);
-		for(size_t j = 0; j < hiddenLayerSize; j = 0){
+		for(size_t j = 0; j < hiddenLayerSize; j++){
 			layerWeights[i][j].resize(hiddenLayerSize);
 			for (size_t k = 0; k < hiddenLayerSize; k++)
 			{
@@ -34,7 +31,6 @@ cout << "what";
 			}
 		}
 	}
-	cout << "2";
 
 	//weight from last hl to output layer
 	layerWeights[numHiddenLayers].resize(hiddenLayerSize);
@@ -46,7 +42,6 @@ cout << "what";
 			layerWeights[numHiddenLayers][i][j] = (rand() % 101 - 50) * 1.0 / 100; 	// This network cannot learn if the initial weights are set to zero.
 		}
 	}
-	cout <<"3";
 }
 
 void DigitFeedForwardNetwork::train(const vector< vector< double > >& x,
@@ -114,8 +109,10 @@ void DigitFeedForwardNetwork::train(const vector< vector< double > >& x,
 			}
 
 
-			for(size_t i: output)
+			for(size_t i = 0; i < output.size(); i++)
 				cout << " " << std::setprecision(2) << output[i];
+
+			cout << endl;
 
 
 			// // calculating errors
