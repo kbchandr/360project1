@@ -7,7 +7,7 @@
 using namespace std;
 int main()
 {
-	double alpha = 0.7;   // learning rate --> bigger steps
+	double alpha = 0.1;   // learning rate --> bigger steps
 	size_t inputLayerSize = 784;
 	size_t numHiddenLayers = 3; 
 	size_t hiddenLayerSize = 32; // larger layersize means differentiating more
