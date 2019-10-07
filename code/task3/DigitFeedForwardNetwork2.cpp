@@ -140,7 +140,6 @@ void DigitFeedForwardNetwork2::train(const vector< vector< double > >& x,
 					}
 				}
 			}
-						cout << "1"<<endl;
 
 
 	
