@@ -26,6 +26,7 @@ int main()
 
 	//scale
 	scaleIntensity(training_images, scaled_training);
+	
 
 	cout << "Number of images: " << scaled_training.size() << endl;
 	cout << "Image size: " << scaled_training[0].size() << endl;

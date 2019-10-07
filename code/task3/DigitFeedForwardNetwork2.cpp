@@ -1,4 +1,5 @@
 #include "DigitFeedForwardNetwork2.h"
+#include <climits>
 #include <iostream>
 #include <random>
 #include <iomanip>      // std::setprecision
@@ -40,6 +41,46 @@ void DigitFeedForwardNetwork2::initialize(int seed)
 		for (size_t j = 0; j < outputLayerSize; j++)
 		{
 			layerWeights[numHiddenLayers][i][j] = (rand() % 101 - 50) * 1.0 / 1000; 	// This network cannot learn if the initial weights are set to zero.
+		}
+	}
+
+	epochMinVLoss = 0;
+	minVLoss = INT_MAX;
+
+}
+
+void DigitFeedForwardNetwork2::adjustWeights(const vector< vector< double > >& activationInput, const vector<double>& expectedOutput){
+	//calculate output error
+	vector< vector <double > > error;
+
+	error.resize(numHiddenLayers+2);
+	error[numHiddenLayers+1].resize(activationInput[numHiddenLayers+1].size());
+	for(size_t node = 0; node < outputLayerSize; node++){
+		double actualInput = activationInput[numHiddenLayers+1][node];
+		error[numHiddenLayers+1][node] = gprime(actualInput) * (expectedOutput[node] - actualInput);
+	}
+
+
+	for(size_t layer = numHiddenLayers; layer > 0; layer--){
+		error[layer].resize(activationInput[layer].size());
+		for(size_t from = 0; from < error[layer].size(); from++){
+			for(size_t to = 0; to < error[layer+1].size(); to++){
+				error[layer][from] += layerWeights[layer][from][to] * error[layer+1][to];
+			}
+			error[layer][from] *= gprime(activationInput[layer][from]);
+		}
+	}
+
+	
+
+	//adjusting weights
+	//adjusting weights at output layer
+
+	for(size_t layer = 0; layer < numHiddenLayers+1; layer++){
+		for(size_t from = 0; from < layerWeights[layer].size(); from++){
+			for(size_t to = 0; to < layerWeights[layer][from].size(); to++){
+				layerWeights[layer][from][to] += alpha * activationInput[layer][from] * error[layer+1][to];
+			}
 		}
 	}
 }
@@ -99,7 +140,6 @@ void DigitFeedForwardNetwork2::train(const vector< vector< double > >& x,
 
 
 			// calculating errors
-			vector< vector <double > > error;
 			vector<double> expectedOutput(outputLayerSize);
 			fill(expectedOutput.begin(), expectedOutput.end(), 0);// fill all with 0
 			expectedOutput[(int)y[example]] = 1;
@@ -109,35 +149,24 @@ void DigitFeedForwardNetwork2::train(const vector< vector< double > >& x,
 				cout << std::setprecision(2) << expectedOutput[i]<< " ";
 
 			cout << endl;
-			//calculate output error
-			error.resize(numHiddenLayers+2);
-			error[numHiddenLayers+1].resize(activationInput[numHiddenLayers+1].size());
-			for(size_t node = 0; node < outputLayerSize; node++){
-				double actualInput = activationInput[numHiddenLayers+1][node];
-				error[numHiddenLayers+1][node] = gprime(actualInput) * (expectedOutput[node] - actualInput);
+
+			//calculate loss
+			double loss = 0;
+			for(size_t i = 0; i < expectedOutput.size(); i++){
+				double y = expectedOutput[i];
+				double o = activationInput[numHiddenLayers+1][i];
+				loss += (y-o) * (y-o);
 			}
-
-
-			for(size_t layer = numHiddenLayers; layer > 0; layer--){
-				error[layer].resize(activationInput[layer].size());
-				for(size_t from = 0; from < error[layer].size(); from++){
-					for(size_t to = 0; to < error[layer+1].size(); to++){
-						error[layer][from] += layerWeights[layer][from][to] * error[layer+1][to];
-					}
-					error[layer][from] *= gprime(activationInput[layer][from]);
-				}
-			}
-
 			
-
-			//adjusting weights
-			//adjusting weights at output layer
-
-			for(size_t layer = 0; layer < numHiddenLayers+1; layer++){
-				for(size_t from = 0; from < layerWeights[layer].size(); from++){
-					for(size_t to = 0; to < layerWeights[layer][from].size(); to++){
-						layerWeights[layer][from][to] += alpha * activationInput[layer][from] * error[layer+1][to];
-					}
+			if(example < 4000){ //training set
+				adjustWeights(activationInput, expectedOutput);
+				trainingLoss.push_back(loss);
+			}
+			else{
+				validationLoss.push_back(loss);
+				if(loss < minVLoss){
+					minVLoss = loss;
+					epochMinVLoss = epoch;
 				}
 			}
 
