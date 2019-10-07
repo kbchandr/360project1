@@ -58,7 +58,7 @@ void DigitFeedForwardNetwork2::train(const vector< vector< double > >& x,
 		for (size_t example = 0; example < trainingexamples; example++)
 		{
 			// propagate the inputs forward to compute the outputs 
-			vector< vector< double > > activationInput(); // We store the activation of each node (over all input and hidden layers) as we need that data during back propagation.			
+			vector< vector< double > > activationInput; // We store the activation of each node (over all input and hidden layers) as we need that data during back propagation.			
 			activationInput.resize(numHiddenLayers+2); //hidden layers + input + output
 			activationInput[0].resize(inputLayerSize);
 
@@ -66,18 +66,28 @@ void DigitFeedForwardNetwork2::train(const vector< vector< double > >& x,
 			{
 				activationInput[0][inputNode] = x[example][inputNode];
 			}
-		
-			for(size_t layer = 1; layer < numHiddenLayers+2; layer++){
+
+			for(size_t layer = 1; layer < numHiddenLayers+1; layer++){
 				size_t layerSize = layerWeights[layer].size();
 				double inputToHidden = 0;
 				activationInput[layer].resize(layerSize);
-
 				for(size_t to = 0; to < layerSize; to++){
-					for(size_t from = 0; from < layerWeights[layer-1].size(); from++){
+					for(size_t from = 0; from < activationInput[layer-1].size(); from++){
 						inputToHidden += layerWeights[layer-1][from][to] * activationInput[layer-1][from];
 					}
 					activationInput[layer][to] = g(inputToHidden);
 				}
+
+			}
+
+			//output
+			activationInput[numHiddenLayers+1].resize(outputLayerSize);
+			for(size_t to = 0; to < outputLayerSize; to++){
+				double inputToHidden = 0;
+				for(size_t from = 0; from < hiddenLayerSize; from++){
+					inputToHidden += layerWeights[numHiddenLayers][from][to] * activationInput[numHiddenLayers][from];
+				}
+				activationInput[numHiddenLayers+1][to] = g(inputToHidden);
 			}
 			
 			
@@ -89,7 +99,7 @@ void DigitFeedForwardNetwork2::train(const vector< vector< double > >& x,
 
 
 			// calculating errors
-			vector< vector <double > > error();
+			vector< vector <double > > error;
 			vector<double> expectedOutput(outputLayerSize);
 			fill(expectedOutput.begin(), expectedOutput.end(), 0);// fill all with 0
 			expectedOutput[(int)y[example]] = 1;
@@ -99,11 +109,10 @@ void DigitFeedForwardNetwork2::train(const vector< vector< double > >& x,
 				cout << std::setprecision(2) << expectedOutput[i]<< " ";
 
 			cout << endl;
-
 			//calculate output error
 			error.resize(numHiddenLayers+2);
 			error[numHiddenLayers+1].resize(activationInput[numHiddenLayers+1].size());
-			for(size_t node = 0; node < outputSize; node++){
+			for(size_t node = 0; node < outputLayerSize; node++){
 				double actualInput = activationInput[numHiddenLayers+1][node];
 				error[numHiddenLayers+1][node] = gprime(actualInput) * (expectedOutput[node] - actualInput);
 			}
@@ -113,37 +122,26 @@ void DigitFeedForwardNetwork2::train(const vector< vector< double > >& x,
 				error[layer].resize(activationInput[layer].size());
 				for(size_t from = 0; from < error[layer].size(); from++){
 					for(size_t to = 0; to < error[layer+1].size(); to++){
-						error[layer] += layerWeights[layer][from][to] * error[layer+1][to];
+						error[layer][from] += layerWeights[layer][from][to] * error[layer+1][to];
 					}
-					error[layer] *= gprime(activationInput[layer][from]);
+					error[layer][from] *= gprime(activationInput[layer][from]);
 				}
 			}
 
-
-
-			for(size_t hiddenLayer = numHiddenLayers-2; hiddenLayer > 0; hiddenLayer--){
-				errorOfHiddenNodes[hiddenLayer].resize(hiddenLayerSize);
-
-				for(size_t i = 0; i < hiddenLayerSize; i++){
-					for(size_t j = 0; j < hiddenLayerSize; j++){
-						errorOfHiddenNodes[hiddenLayer][i] += layerWeights[hiddenLayer][i][j] * errorOfHiddenNodes[hiddenLayer+1][j];
-					}
-					errorOfHiddenNodes[hiddenLayer][i] *= gprime(activationHidden[hiddenLayer][i]);
-
-				}
-			}
-
+			
 
 			//adjusting weights
 			//adjusting weights at output layer
 
 			for(size_t layer = 0; layer < numHiddenLayers+1; layer++){
 				for(size_t from = 0; from < layerWeights[layer].size(); from++){
-					for(size_t to = 0; to < layerWeights[layer+1].size(); to++){
+					for(size_t to = 0; to < layerWeights[layer][from].size(); to++){
 						layerWeights[layer][from][to] += alpha * activationInput[layer][from] * error[layer+1][to];
 					}
 				}
 			}
+						cout << "1"<<endl;
+
 
 	
 		}

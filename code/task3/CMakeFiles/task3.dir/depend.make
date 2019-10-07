@@ -4,7 +4,10 @@
 CMakeFiles/task3.dir/DigitFeedForwardNetwork.cpp.o: DigitFeedForwardNetwork.cpp
 CMakeFiles/task3.dir/DigitFeedForwardNetwork.cpp.o: DigitFeedForwardNetwork.h
 
-CMakeFiles/task3.dir/main.cpp.o: DigitFeedForwardNetwork.h
+CMakeFiles/task3.dir/DigitFeedForwardNetwork2.cpp.o: DigitFeedForwardNetwork2.cpp
+CMakeFiles/task3.dir/DigitFeedForwardNetwork2.cpp.o: DigitFeedForwardNetwork2.h
+
+CMakeFiles/task3.dir/main.cpp.o: DigitFeedForwardNetwork2.h
 CMakeFiles/task3.dir/main.cpp.o: MNIST_reader.h
 CMakeFiles/task3.dir/main.cpp.o: main.cpp
 
