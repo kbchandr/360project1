@@ -15,7 +15,7 @@ void DigitFeedForwardNetwork::initialize(int seed)
 		layerWeights[0][i].resize(hiddenLayerSize);
 		for (size_t j = 0; j < hiddenLayerSize; j++)
 		{
-			layerWeights[0][i][j] = (rand() % 101 - 50) * 1.0 / 100; 	// This network cannot learn if the initial weights are set to zero.
+			layerWeights[0][i][j] = (rand() % 101 - 50) * 1.0 / 1000; 	// This network cannot learn if the initial weights are set to zero.
 		}
 	}
 
@@ -27,7 +27,7 @@ void DigitFeedForwardNetwork::initialize(int seed)
 			layerWeights[i][j].resize(hiddenLayerSize);
 			for (size_t k = 0; k < hiddenLayerSize; k++)
 			{
-				layerWeights[i][j][k] = (rand() % 101 - 50) * 1.0 / 100; 	// This network cannot learn if the initial weights are set to zero.
+				layerWeights[i][j][k] = (rand() % 101 - 50) * 1.0 / 1000; 	// This network cannot learn if the initial weights are set to zero.
 			}
 		}
 	}
@@ -39,7 +39,7 @@ void DigitFeedForwardNetwork::initialize(int seed)
 		layerWeights[numHiddenLayers][i].resize(outputSize);
 		for (size_t j = 0; j < outputSize; j++)
 		{
-			layerWeights[numHiddenLayers][i][j] = (rand() % 101 - 50) * 1.0 / 100; 	// This network cannot learn if the initial weights are set to zero.
+			layerWeights[numHiddenLayers][i][j] = (rand() % 101 - 50) * 1.0 / 1000; 	// This network cannot learn if the initial weights are set to zero.
 		}
 	}
 }
@@ -79,19 +79,22 @@ void DigitFeedForwardNetwork::train(const vector< vector< double > >& x,
 				activationHidden[0][hiddenNode] = g(inputToHidden);
 			}
 
+
+
 			//between hiddenlayers
-			for(size_t hiddenLayer = 1; hiddenLayer < numHiddenLayers; hiddenLayer++){
-				activationHidden[hiddenLayer].resize(hiddenLayerSize);
+			for(size_t hiddenLayer = 0; hiddenLayer < numHiddenLayers-1; hiddenLayer++){
+				activationHidden[hiddenLayer+1].resize(hiddenLayerSize);
 
 				for (size_t hiddenNode = 0; hiddenNode < hiddenLayerSize; hiddenNode++)
 				{
 					double inputToHidden = 0;
 					for (size_t inputNode = 0; inputNode < hiddenLayerSize; inputNode++)
 					{
-						inputToHidden += layerWeights[hiddenLayer][inputNode][hiddenNode] * activationHidden[hiddenLayer-1][inputNode];
+						inputToHidden += layerWeights[hiddenLayer+1][inputNode][hiddenNode] * activationHidden[hiddenLayer][inputNode];
 					}
-					activationHidden[hiddenLayer][hiddenNode] = g(inputToHidden);
+					activationHidden[hiddenLayer+1][hiddenNode] = g(inputToHidden);
 				}
+
 				
 			}
 
@@ -108,7 +111,7 @@ void DigitFeedForwardNetwork::train(const vector< vector< double > >& x,
 
 			cout << "output: ";
 			for(size_t i = 0; i < output.size(); i++)
-				cout << std::setprecision(2) << output[i]<< " ";
+				cout << std::fixed <<std::setprecision(3) << output[i]<< " ";
 
 			cout << endl;
 
@@ -140,7 +143,7 @@ void DigitFeedForwardNetwork::train(const vector< vector< double > >& x,
 			errorOfHiddenNodes[numHiddenLayers-1].resize(hiddenLayerSize);
 			for(size_t i = 0; i < hiddenLayerSize; i++){
 				for(size_t j = 0; j < outputSize; j++){
-					errorOfHiddenNodes[numHiddenLayers-1][i] = layerWeights[numHiddenLayers-1][i][j] * errorOfOutputNodes[j];
+					errorOfHiddenNodes[numHiddenLayers-1][i] += layerWeights[numHiddenLayers-1][i][j] * errorOfOutputNodes[j];
 				}
 				errorOfHiddenNodes[numHiddenLayers-1][i] *= gprime(activationHidden[numHiddenLayers-1][i]);
 			}
@@ -152,13 +155,38 @@ void DigitFeedForwardNetwork::train(const vector< vector< double > >& x,
 
 				for(size_t i = 0; i < hiddenLayerSize; i++){
 					for(size_t j = 0; j < hiddenLayerSize; j++){
-						errorOfHiddenNodes[hiddenLayer][i] = layerWeights[hiddenLayer][i][j] * errorOfOutputNodes[j];
+						errorOfHiddenNodes[hiddenLayer][i] += layerWeights[hiddenLayer][i][j] * errorOfHiddenNodes[hiddenLayer+1][j];
 					}
 					errorOfHiddenNodes[hiddenLayer][i] *= gprime(activationHidden[hiddenLayer][i]);
 
 				}
 			}
 
+			// errorOfHiddenNodes[0].resize(inputLayerSize);
+			// for(size_t i = 0; i < inputLayerSize; i++){
+			// 	for(size_t j = 0; j < hiddenLayerSize; j++){
+			// 		errorOfHiddenNodes[0][i] += layerWeights[0][i][j] * errorOfHiddenNodes[1][j];
+			// 	}
+			// 	errorOfHiddenNodes[0][i] *= gprime(activationHidden[0][i]);
+			// }
+
+
+			// for(size_t i  = 0; i < errorOfOutputNodes.size(); i++){
+			// 	cout << errorOfOutputNodes[i]<< " ";
+			// }
+			// cout <<endl;
+
+			// for(size_t i = 0; i < errorOfHiddenNodes.size(); i++){
+			// 	for(size_t j = 0; j < errorOfHiddenNodes[i].size(); j++){
+			// 		cout << errorOfHiddenNodes[i][j]<<" ";
+			// 	}
+			// }
+			// cout << endl;
+			// for(size_t j = 0; j < errorOfHiddenNodes.size(); j++){
+			// 	for(size_t k = 0; k < errorOfHiddenNodes[j].size(); k++){
+			// 		cout << errorOfHiddenNodes[j][k];
+			// 	}
+			// }
 			//adjusting weights
 			//adjusting weights at output layer
 
@@ -172,7 +200,7 @@ void DigitFeedForwardNetwork::train(const vector< vector< double > >& x,
 			}
 
 			// Adjusting weights at hidden layer.
-			for(size_t i = 1; i < numHiddenLayers-1; i++){
+			for(size_t i = 0; i < numHiddenLayers-1; i++){
 				for(size_t j = 0; j < hiddenLayerSize; j++){
 					for (size_t k = 0; k < hiddenLayerSize; k++)
 					{
@@ -191,6 +219,7 @@ void DigitFeedForwardNetwork::train(const vector< vector< double > >& x,
 				}
 			}		
 		}
+
 		cout << endl;
 	}
 
