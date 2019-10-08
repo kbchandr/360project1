@@ -7,15 +7,15 @@
 using namespace std;
 int main()
 {
-	double alpha = 0.1;   // learning rate --> bigger steps
+	double alpha = 0.2;   // learning rate --> bigger steps
 	size_t inputLayerSize = 784;
-	size_t numHiddenLayers = 2; 
-	size_t hiddenLayerSize = 32; // larger layersize means differentiating more
-	size_t numEpochs = 68; //time and accuracy
+	size_t numHiddenLayers = 6; 
+	size_t hiddenLayerSize = 60; // larger layersize means differentiating more
+	size_t numEpochs = 33; //time and accuracy
 	size_t outputSize = 10;
 
-	int seed = 0; // random seed for the network initialization
-
+	int seed = 21; // random seed for the network initialization
+	cout <<alpha<< " "<<numHiddenLayers<<" "<<hiddenLayerSize<<" "<<numEpochs<<endl;
 	string filename = "train-images.idx3-ubyte";
 	//load MNIST images
 	vector <vector< int > > training_images;
@@ -51,12 +51,10 @@ int main()
 	vector <vector< double > > scaled_testing;
 	loadMnistImages(filename, testing_images);
 	scaleIntensity(testing_images, scaled_testing);
-
-	filename = "t10k-labels.idx3-ubyte";
+	filename = "t10k-labels.idx1-ubyte";
 	vector<int> testing_labels;
 	loadMnistLabels(filename, testing_labels);
 	vector<double> double_test(testing_labels.begin(), testing_labels.end());
-
 	nn.test(scaled_testing, double_test);
 
 

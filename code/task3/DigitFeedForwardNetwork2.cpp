@@ -137,7 +137,7 @@ void DigitFeedForwardNetwork2::train(const vector< vector< double > >& x,
 		double trainLoss= 0;
 		double valLoss = 0;
 		// print
-		cout << "epoch = " << epoch <<endl;
+		cout << "epoch = " << epoch << " ";
 		for (size_t example = 0; example < 4000; example++)
 		{
 			// propagate the inputs forward to compute the outputs 
@@ -177,39 +177,39 @@ void DigitFeedForwardNetwork2::train(const vector< vector< double > >& x,
 	
 		}
 
-		// for(size_t example = 4000; example < 6000; example++){
-		// 	vector< vector< double > > activationInput;
-		// 	activationInput = feedForward(x, example);
+		for(size_t example = 4000; example < 6000; example++){
+			vector< vector< double > > activationInput;
+			activationInput = feedForward(x, example);
 
-		// 	// calculating errors
-		// 	vector<double> expectedOutput(outputLayerSize);
-		// 	fill(expectedOutput.begin(), expectedOutput.end(), 0);// fill all with 0
-		// 	expectedOutput[(int)y[example]] = 1;
+			// calculating errors
+			vector<double> expectedOutput(outputLayerSize);
+			fill(expectedOutput.begin(), expectedOutput.end(), 0);// fill all with 0
+			expectedOutput[(int)y[example]] = 1;
 
-		// 	int predictedOutputIndex = 0;
-		// 	for(int i = 1; i < 10; i++){
-		// 		if(activationInput[numHiddenLayers+1][i] > activationInput[numHiddenLayers+1][predictedOutputIndex]){
-		// 			predictedOutputIndex = i;
-		// 		}
-		// 	}
-		// 	//calculate loss
-		// 	double loss = 0;
-		// 	for(size_t i = 0; i < expectedOutput.size(); i++){
-		// 		double y = expectedOutput[i];
-		// 		double o = activationInput[numHiddenLayers+1][i];
-		// 		loss += (y-o) * (y-o);
-		// 	}
-		// 	valLoss +=loss;
-		// 	totalValSamples++;				
-		// 	if(predictedOutputIndex == y [example]){
-		// 		correctValSamples++;
-		// 	}
-		// }
+			int predictedOutputIndex = 0;
+			for(int i = 1; i < 10; i++){
+				if(activationInput[numHiddenLayers+1][i] > activationInput[numHiddenLayers+1][predictedOutputIndex]){
+					predictedOutputIndex = i;
+				}
+			}
+			//calculate loss
+			double loss = 0;
+			for(size_t i = 0; i < expectedOutput.size(); i++){
+				double y = expectedOutput[i];
+				double o = activationInput[numHiddenLayers+1][i];
+				loss += (y-o) * (y-o);
+			}
+			valLoss +=loss;
+			totalValSamples++;				
+			if(predictedOutputIndex == y [example]){
+				correctValSamples++;
+			}
+		}
 		// cout << endl;
 		// cout << "Training Accuracy: "<< correctTrainSamples/totalTrainSamples<<endl;
 		// cout << "Validation Accuracy: "<<correctValSamples/totalValSamples <<endl;
 		// cout << "Training Loss: "<< trainLoss/totalTrainSamples<<endl;
-		// cout << "Validation Loss: "<<valLoss/totalValSamples <<endl;
+		cout << "Validation Loss: "<<valLoss/totalValSamples <<endl;
 
 	}
 
@@ -247,7 +247,7 @@ void DigitFeedForwardNetwork2::test(const vector< vector< double > >& x,
 					predictedOutputIndex = i;
 				}
 			}
-
+			
 			totalTestSamples++;
 			if(predictedOutputIndex == y [example]){
 				correctTestSamples++;
