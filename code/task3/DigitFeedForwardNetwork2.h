@@ -9,9 +9,10 @@ class DigitFeedForwardNetwork2
 public:
 	void initialize(int seed);
 
+	vector< vector< double > > feedForward(const vector< vector< double > >& x, size_t example);
 	void train(const vector< vector< double > >& x,
 		const vector< double >& y, size_t numEpochs);
-
+	void test(const vector< vector< double > >& x, const vector< double >& y);
 	void adjustWeights(const vector< vector< double > >& activationInput, const vector<double>& expectedOutput);
 
 
@@ -20,12 +21,8 @@ public:
 
 private:
 	vector<vector< vector< double > > > layerWeights; // [layer][from][to]
-	vector<double> trainingLoss;
-	vector<double> validationLoss;
 
 	double alpha;
-	int epochMinVLoss;
-	int minVLoss;
 	size_t hiddenLayerSize;
 	size_t numHiddenLayers;
 	size_t inputLayerSize;
