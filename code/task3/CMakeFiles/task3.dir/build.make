@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/cs104/Documents/360project1/code/task3
+CMAKE_SOURCE_DIR = /home/cs104/360project1/code/task3
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/cs104/Documents/360project1/code/task3
+CMAKE_BINARY_DIR = /home/cs104/360project1/code/task3
 
 # Include any dependencies generated for this target.
 include CMakeFiles/task3.dir/depend.make
@@ -59,16 +59,16 @@ include CMakeFiles/task3.dir/flags.make
 
 CMakeFiles/task3.dir/main.cpp.o: CMakeFiles/task3.dir/flags.make
 CMakeFiles/task3.dir/main.cpp.o: main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cs104/Documents/360project1/code/task3/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/task3.dir/main.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/task3.dir/main.cpp.o -c /home/cs104/Documents/360project1/code/task3/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cs104/360project1/code/task3/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/task3.dir/main.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/task3.dir/main.cpp.o -c /home/cs104/360project1/code/task3/main.cpp
 
 CMakeFiles/task3.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/task3.dir/main.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/cs104/Documents/360project1/code/task3/main.cpp > CMakeFiles/task3.dir/main.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/cs104/360project1/code/task3/main.cpp > CMakeFiles/task3.dir/main.cpp.i
 
 CMakeFiles/task3.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/task3.dir/main.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/cs104/Documents/360project1/code/task3/main.cpp -o CMakeFiles/task3.dir/main.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/cs104/360project1/code/task3/main.cpp -o CMakeFiles/task3.dir/main.cpp.s
 
 CMakeFiles/task3.dir/main.cpp.o.requires:
 
@@ -83,16 +83,16 @@ CMakeFiles/task3.dir/main.cpp.o.provides.build: CMakeFiles/task3.dir/main.cpp.o
 
 CMakeFiles/task3.dir/DigitFeedForwardNetwork.cpp.o: CMakeFiles/task3.dir/flags.make
 CMakeFiles/task3.dir/DigitFeedForwardNetwork.cpp.o: DigitFeedForwardNetwork.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cs104/Documents/360project1/code/task3/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/task3.dir/DigitFeedForwardNetwork.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/task3.dir/DigitFeedForwardNetwork.cpp.o -c /home/cs104/Documents/360project1/code/task3/DigitFeedForwardNetwork.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cs104/360project1/code/task3/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/task3.dir/DigitFeedForwardNetwork.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/task3.dir/DigitFeedForwardNetwork.cpp.o -c /home/cs104/360project1/code/task3/DigitFeedForwardNetwork.cpp
 
 CMakeFiles/task3.dir/DigitFeedForwardNetwork.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/task3.dir/DigitFeedForwardNetwork.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/cs104/Documents/360project1/code/task3/DigitFeedForwardNetwork.cpp > CMakeFiles/task3.dir/DigitFeedForwardNetwork.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/cs104/360project1/code/task3/DigitFeedForwardNetwork.cpp > CMakeFiles/task3.dir/DigitFeedForwardNetwork.cpp.i
 
 CMakeFiles/task3.dir/DigitFeedForwardNetwork.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/task3.dir/DigitFeedForwardNetwork.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/cs104/Documents/360project1/code/task3/DigitFeedForwardNetwork.cpp -o CMakeFiles/task3.dir/DigitFeedForwardNetwork.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/cs104/360project1/code/task3/DigitFeedForwardNetwork.cpp -o CMakeFiles/task3.dir/DigitFeedForwardNetwork.cpp.s
 
 CMakeFiles/task3.dir/DigitFeedForwardNetwork.cpp.o.requires:
 
@@ -107,16 +107,16 @@ CMakeFiles/task3.dir/DigitFeedForwardNetwork.cpp.o.provides.build: CMakeFiles/ta
 
 CMakeFiles/task3.dir/DigitFeedForwardNetwork2.cpp.o: CMakeFiles/task3.dir/flags.make
 CMakeFiles/task3.dir/DigitFeedForwardNetwork2.cpp.o: DigitFeedForwardNetwork2.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cs104/Documents/360project1/code/task3/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/task3.dir/DigitFeedForwardNetwork2.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/task3.dir/DigitFeedForwardNetwork2.cpp.o -c /home/cs104/Documents/360project1/code/task3/DigitFeedForwardNetwork2.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cs104/360project1/code/task3/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/task3.dir/DigitFeedForwardNetwork2.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/task3.dir/DigitFeedForwardNetwork2.cpp.o -c /home/cs104/360project1/code/task3/DigitFeedForwardNetwork2.cpp
 
 CMakeFiles/task3.dir/DigitFeedForwardNetwork2.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/task3.dir/DigitFeedForwardNetwork2.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/cs104/Documents/360project1/code/task3/DigitFeedForwardNetwork2.cpp > CMakeFiles/task3.dir/DigitFeedForwardNetwork2.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/cs104/360project1/code/task3/DigitFeedForwardNetwork2.cpp > CMakeFiles/task3.dir/DigitFeedForwardNetwork2.cpp.i
 
 CMakeFiles/task3.dir/DigitFeedForwardNetwork2.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/task3.dir/DigitFeedForwardNetwork2.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/cs104/Documents/360project1/code/task3/DigitFeedForwardNetwork2.cpp -o CMakeFiles/task3.dir/DigitFeedForwardNetwork2.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/cs104/360project1/code/task3/DigitFeedForwardNetwork2.cpp -o CMakeFiles/task3.dir/DigitFeedForwardNetwork2.cpp.s
 
 CMakeFiles/task3.dir/DigitFeedForwardNetwork2.cpp.o.requires:
 
@@ -143,7 +143,7 @@ task3: CMakeFiles/task3.dir/DigitFeedForwardNetwork.cpp.o
 task3: CMakeFiles/task3.dir/DigitFeedForwardNetwork2.cpp.o
 task3: CMakeFiles/task3.dir/build.make
 task3: CMakeFiles/task3.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/cs104/Documents/360project1/code/task3/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable task3"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/cs104/360project1/code/task3/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable task3"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/task3.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -162,6 +162,6 @@ CMakeFiles/task3.dir/clean:
 .PHONY : CMakeFiles/task3.dir/clean
 
 CMakeFiles/task3.dir/depend:
-	cd /home/cs104/Documents/360project1/code/task3 && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/cs104/Documents/360project1/code/task3 /home/cs104/Documents/360project1/code/task3 /home/cs104/Documents/360project1/code/task3 /home/cs104/Documents/360project1/code/task3 /home/cs104/Documents/360project1/code/task3/CMakeFiles/task3.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/cs104/360project1/code/task3 && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/cs104/360project1/code/task3 /home/cs104/360project1/code/task3 /home/cs104/360project1/code/task3 /home/cs104/360project1/code/task3 /home/cs104/360project1/code/task3/CMakeFiles/task3.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/task3.dir/depend
 
