@@ -17,6 +17,8 @@ random
 -
 iomanip
 -
+math.h
+-
 
 /home/cs104/360project1/code/task3/BinaryNetwork.h
 math.h

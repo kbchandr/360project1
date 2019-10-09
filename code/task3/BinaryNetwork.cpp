@@ -3,6 +3,7 @@
 #include <iostream>
 #include <random>
 #include <iomanip>      // std::setprecision
+#include <math.h> 
 
 double BinaryNetwork::generateRandomWeight(){
 	double random = (rand() % 101 - 50) * 1.0 / 100;
@@ -145,12 +146,17 @@ void BinaryNetwork::train(const vector< vector< double > >& x,
 			// calculating errors
 			vector<double> expectedOutput(outputLayerSize);
 			fill(expectedOutput.begin(), expectedOutput.end(), 0);// fill all with 0
-			expectedOutput[(int)y[example]] = 1;
+			
+			int n = y[example];
+			for(int i = 0; i < 4; i++){
+				expectedOutput[i] = n % 2;
+				n= n/2;
+			}
 
-			int predictedOutputIndex = 0;
-			for(size_t i = 1; i < outputLayerSize; i++){
-				if(activationInput[numHiddenLayers+1][i] > activationInput[numHiddenLayers+1][predictedOutputIndex]){
-					predictedOutputIndex = i;
+			int predictedOutput=0;
+			for(size_t i = 0; i < outputLayerSize; i++){
+				if(activationInput[numHiddenLayers+1][i] > 0.8){ //threshold
+					predictedOutput += pow(2, i);					
 				}
 			}
 			//calculate loss
@@ -165,7 +171,7 @@ void BinaryNetwork::train(const vector< vector< double > >& x,
 			adjustWeights(activationInput, expectedOutput);
 			trainLoss+=loss;
 			totalTrainSamples++;
-			if(predictedOutputIndex == y [example]){
+			if(predictedOutput == y [example]){
 				correctTrainSamples++;
 			}	
 		}
@@ -177,12 +183,17 @@ void BinaryNetwork::train(const vector< vector< double > >& x,
 			// calculating errors
 			vector<double> expectedOutput(outputLayerSize);
 			fill(expectedOutput.begin(), expectedOutput.end(), 0);// fill all with 0
-			expectedOutput[(int)y[example]] = 1;
+			
+			int n = y[example];
+			for(int i = 0; i < 4; i++){
+				expectedOutput[i] = n % 2;
+				n= n/2;
+			}
 
-			int predictedOutputIndex = 0;
-			for(int i = 1; i < outputLayerSize; i++){
-				if(activationInput[numHiddenLayers+1][i] > activationInput[numHiddenLayers+1][predictedOutputIndex]){
-					predictedOutputIndex = i;
+			int predictedOutput=0;
+			for(size_t i = 0; i < outputLayerSize; i++){
+				if(activationInput[numHiddenLayers+1][i] > 0.8){ //threshold
+					predictedOutput += pow(2, i);					
 				}
 			}
 			//calculate loss
@@ -194,7 +205,7 @@ void BinaryNetwork::train(const vector< vector< double > >& x,
 			}
 			valLoss +=loss;
 			totalValSamples++;				
-			if(predictedOutputIndex == y [example]){
+			if(predictedOutput == y [example]){
 				correctValSamples++;
 			}
 		}
@@ -228,17 +239,21 @@ void BinaryNetwork::test(const vector< vector< double > >& x,
 		// calculating errors
 		vector<double> expectedOutput(outputLayerSize);
 		fill(expectedOutput.begin(), expectedOutput.end(), 0);// fill all with 0
-		expectedOutput[(int)y[example]] = 1;
+		int n = y[example];
+		for(int i = 0; i < 4; i++){
+			expectedOutput[i] = n % 2;
+			n= n/2;
+		}
 
-		int predictedOutputIndex = 0;
-		for(int i = 1; i < outputLayerSize; i++){
-			if(activationInput[numHiddenLayers+1][i] > activationInput[numHiddenLayers+1][predictedOutputIndex]){
-				predictedOutputIndex = i;
+		int predictedOutput=0;
+		for(size_t i = 0; i < outputLayerSize; i++){
+			if(activationInput[numHiddenLayers+1][i] > 0.8){ //threshold
+				predictedOutput += pow(2, i);					
 			}
 		}
 		
 		totalTestSamples++;
-		if(predictedOutputIndex == y [example]){
+		if(predictedOutput == y [example]){
 			correctTestSamples++;
 		}
 
