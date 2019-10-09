@@ -7,11 +7,11 @@
 using namespace std;
 int main()
 {
-	double alpha = 0.2;   // learning rate --> bigger steps
+	double alpha = 0.1;   // learning rate --> bigger steps
 	size_t inputLayerSize = 784;
-	size_t numHiddenLayers = 6; 
-	size_t hiddenLayerSize = 60; // larger layersize means differentiating more
-	size_t numEpochs = 33; //time and accuracy
+	size_t numHiddenLayers = 2; 
+	size_t hiddenLayerSize = 32; // larger layersize means differentiating more
+	size_t numEpochs = 25; //time and accuracy
 	size_t outputSize = 10;
 
 	int seed = 21; // random seed for the network initialization

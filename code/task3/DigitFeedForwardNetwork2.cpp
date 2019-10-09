@@ -16,7 +16,11 @@ void DigitFeedForwardNetwork2::initialize(int seed)
 		layerWeights[0][i].resize(hiddenLayerSize);
 		for (size_t j = 0; j < hiddenLayerSize; j++)
 		{
-			layerWeights[0][i][j] = (rand() % 101 - 50) * 1.0 / 1000; 	// This network cannot learn if the initial weights are set to zero.
+			double random = (rand() % 101 - 50) * 1.0 / 100;
+			while(random == 0){
+				random = (rand() % 101 - 50) * 1.0 / 100;
+			}
+			layerWeights[0][i][j] = random; 	// This network cannot learn if the initial weights are set to zero.
 		}
 	}
 
@@ -28,7 +32,11 @@ void DigitFeedForwardNetwork2::initialize(int seed)
 			layerWeights[i][j].resize(hiddenLayerSize);
 			for (size_t k = 0; k < hiddenLayerSize; k++)
 			{
-				layerWeights[i][j][k] = (rand() % 101 - 50) * 1.0 / 1000; 	// This network cannot learn if the initial weights are set to zero.
+				double random = (rand() % 101 - 50) * 1.0 / 100;
+				while(random == 0){
+					random = (rand() % 101 - 50) * 1.0 / 100;
+				}
+				layerWeights[i][j][k] = random;  	// This network cannot learn if the initial weights are set to zero.
 			}
 		}
 	}
@@ -40,12 +48,13 @@ void DigitFeedForwardNetwork2::initialize(int seed)
 		layerWeights[numHiddenLayers][i].resize(outputLayerSize);
 		for (size_t j = 0; j < outputLayerSize; j++)
 		{
-			layerWeights[numHiddenLayers][i][j] = (rand() % 101 - 50) * 1.0 / 1000; 	// This network cannot learn if the initial weights are set to zero.
+			double random = (rand() % 101 - 50) * 1.0 / 100;
+			while(random == 0){
+				random = (rand() % 101 - 50) * 1.0 / 100;
+			}
+			layerWeights[numHiddenLayers][i][j] = random; 	// This network cannot learn if the initial weights are set to zero.
 		}
 	}
-
-
-
 
 }
 
@@ -53,33 +62,31 @@ void DigitFeedForwardNetwork2::adjustWeights(const vector< vector< double > >& a
 	//calculate output error
 	vector< vector <double > > error;
 
-	error.resize(numHiddenLayers+2);
-	error[numHiddenLayers+1].resize(activationInput[numHiddenLayers+1].size());
+	error.resize(numHiddenLayers+1);
+	error[numHiddenLayers].resize(activationInput[numHiddenLayers+1].size());
 	for(size_t node = 0; node < outputLayerSize; node++){
 		double actualInput = activationInput[numHiddenLayers+1][node];
-		error[numHiddenLayers+1][node] = gprime(actualInput) * (expectedOutput[node] - actualInput);
+		error[numHiddenLayers][node] = gprime(actualInput) * (expectedOutput[node] - actualInput);
 	}
 
-
-	for(size_t layer = numHiddenLayers; layer > 0; layer--){
-		error[layer].resize(activationInput[layer].size());
+	for(int layer = numHiddenLayers-1; layer >= 0; layer--){
+		error[layer].resize(activationInput[layer+1].size());
 		for(size_t from = 0; from < error[layer].size(); from++){
 			for(size_t to = 0; to < error[layer+1].size(); to++){
-				error[layer][from] += layerWeights[layer][from][to] * error[layer+1][to];
+				error[layer][from] += layerWeights[layer+1][from][to] * error[layer+1][to];
 			}
-			error[layer][from] *= gprime(activationInput[layer][from]);
+			error[layer][from] *= gprime(activationInput[layer+1][from]);
 		}
 	}
-
 	
-
 	//adjusting weights
 	//adjusting weights at output layer
 
 	for(size_t layer = 0; layer < numHiddenLayers+1; layer++){
 		for(size_t from = 0; from < layerWeights[layer].size(); from++){
 			for(size_t to = 0; to < layerWeights[layer][from].size(); to++){
-				layerWeights[layer][from][to] += alpha * activationInput[layer][from] * error[layer+1][to];
+			
+				layerWeights[layer][from][to] += alpha * activationInput[layer][from] * error[layer][to];
 			}
 		}
 	}
@@ -125,8 +132,6 @@ vector< vector< double > > DigitFeedForwardNetwork2::feedForward(const vector< v
 void DigitFeedForwardNetwork2::train(const vector< vector< double > >& x,
 	const vector< double >& y, size_t numEpochs)
 {
-
-
 	// train the network
 	for (size_t epoch = 0; epoch < numEpochs; epoch++)
 	{
@@ -169,12 +174,7 @@ void DigitFeedForwardNetwork2::train(const vector< vector< double > >& x,
 			totalTrainSamples++;
 			if(predictedOutputIndex == y [example]){
 				correctTrainSamples++;
-			}
-			
-			
-
-
-	
+			}	
 		}
 
 		for(size_t example = 4000; example < 6000; example++){
@@ -205,10 +205,10 @@ void DigitFeedForwardNetwork2::train(const vector< vector< double > >& x,
 				correctValSamples++;
 			}
 		}
-		// cout << endl;
-		// cout << "Training Accuracy: "<< correctTrainSamples/totalTrainSamples<<endl;
-		// cout << "Validation Accuracy: "<<correctValSamples/totalValSamples <<endl;
-		// cout << "Training Loss: "<< trainLoss/totalTrainSamples<<endl;
+		cout << endl;
+		cout << "Training Accuracy: "<< correctTrainSamples/totalTrainSamples<<endl;
+		cout << "Validation Accuracy: "<<correctValSamples/totalValSamples <<endl;
+		cout << "Training Loss: "<< trainLoss/totalTrainSamples<<endl;
 		cout << "Validation Loss: "<<valLoss/totalValSamples <<endl;
 
 	}
