@@ -4,11 +4,12 @@
 
 using namespace std;
 
-class DigitFeedForwardNetwork2
+class BinaryNetwork
 {
 public:
 	void initialize(int seed);
 	double generateRandomWeight();
+
 	vector< vector< double > > feedForward(const vector< vector< double > >& x, size_t example);
 	void train(const vector< vector< double > >& x,
 		const vector< double >& y, size_t numEpochs);
@@ -16,7 +17,7 @@ public:
 	void adjustWeights(const vector< vector< double > >& activationInput, const vector<double>& expectedOutput);
 
 
-	DigitFeedForwardNetwork2(double alpha, size_t hiddenLayerSize, size_t numHiddenLayers, size_t inputLayerSize, size_t outputLayerSize):
+	BinaryNetwork(double alpha, size_t hiddenLayerSize, size_t numHiddenLayers, size_t inputLayerSize, size_t outputLayerSize):
 		alpha(alpha), hiddenLayerSize(hiddenLayerSize), numHiddenLayers(numHiddenLayers), inputLayerSize(inputLayerSize), outputLayerSize(outputLayerSize) {}
 
 private:

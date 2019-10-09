@@ -123,32 +123,32 @@ task3/fast:
 	$(MAKE) -f CMakeFiles/task3.dir/build.make CMakeFiles/task3.dir/build
 .PHONY : task3/fast
 
-DigitFeedForwardNetwork.o: DigitFeedForwardNetwork.cpp.o
+BinaryNetwork.o: BinaryNetwork.cpp.o
 
-.PHONY : DigitFeedForwardNetwork.o
+.PHONY : BinaryNetwork.o
 
 # target to build an object file
-DigitFeedForwardNetwork.cpp.o:
-	$(MAKE) -f CMakeFiles/task3.dir/build.make CMakeFiles/task3.dir/DigitFeedForwardNetwork.cpp.o
-.PHONY : DigitFeedForwardNetwork.cpp.o
+BinaryNetwork.cpp.o:
+	$(MAKE) -f CMakeFiles/task3.dir/build.make CMakeFiles/task3.dir/BinaryNetwork.cpp.o
+.PHONY : BinaryNetwork.cpp.o
 
-DigitFeedForwardNetwork.i: DigitFeedForwardNetwork.cpp.i
+BinaryNetwork.i: BinaryNetwork.cpp.i
 
-.PHONY : DigitFeedForwardNetwork.i
+.PHONY : BinaryNetwork.i
 
 # target to preprocess a source file
-DigitFeedForwardNetwork.cpp.i:
-	$(MAKE) -f CMakeFiles/task3.dir/build.make CMakeFiles/task3.dir/DigitFeedForwardNetwork.cpp.i
-.PHONY : DigitFeedForwardNetwork.cpp.i
+BinaryNetwork.cpp.i:
+	$(MAKE) -f CMakeFiles/task3.dir/build.make CMakeFiles/task3.dir/BinaryNetwork.cpp.i
+.PHONY : BinaryNetwork.cpp.i
 
-DigitFeedForwardNetwork.s: DigitFeedForwardNetwork.cpp.s
+BinaryNetwork.s: BinaryNetwork.cpp.s
 
-.PHONY : DigitFeedForwardNetwork.s
+.PHONY : BinaryNetwork.s
 
 # target to generate assembly for a file
-DigitFeedForwardNetwork.cpp.s:
-	$(MAKE) -f CMakeFiles/task3.dir/build.make CMakeFiles/task3.dir/DigitFeedForwardNetwork.cpp.s
-.PHONY : DigitFeedForwardNetwork.cpp.s
+BinaryNetwork.cpp.s:
+	$(MAKE) -f CMakeFiles/task3.dir/build.make CMakeFiles/task3.dir/BinaryNetwork.cpp.s
+.PHONY : BinaryNetwork.cpp.s
 
 DigitFeedForwardNetwork2.o: DigitFeedForwardNetwork2.cpp.o
 
@@ -213,9 +213,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... task3"
-	@echo "... DigitFeedForwardNetwork.o"
-	@echo "... DigitFeedForwardNetwork.i"
-	@echo "... DigitFeedForwardNetwork.s"
+	@echo "... BinaryNetwork.o"
+	@echo "... BinaryNetwork.i"
+	@echo "... BinaryNetwork.s"
 	@echo "... DigitFeedForwardNetwork2.o"
 	@echo "... DigitFeedForwardNetwork2.i"
 	@echo "... DigitFeedForwardNetwork2.s"

@@ -6,9 +6,11 @@
 
 #IncludeRegexTransform: 
 
-/home/cs104/360project1/code/task3/DigitFeedForwardNetwork.cpp
-DigitFeedForwardNetwork.h
-/home/cs104/360project1/code/task3/DigitFeedForwardNetwork.h
+/home/cs104/360project1/code/task3/BinaryNetwork.cpp
+BinaryNetwork.h
+/home/cs104/360project1/code/task3/BinaryNetwork.h
+climits
+-
 iostream
 -
 random
@@ -16,7 +18,7 @@ random
 iomanip
 -
 
-/home/cs104/360project1/code/task3/DigitFeedForwardNetwork.h
+/home/cs104/360project1/code/task3/BinaryNetwork.h
 math.h
 -
 vector
@@ -59,4 +61,6 @@ MNIST_reader.h
 /home/cs104/360project1/code/task3/MNIST_reader.h
 DigitFeedForwardNetwork2.h
 /home/cs104/360project1/code/task3/DigitFeedForwardNetwork2.h
+BinaryNetwork.h
+/home/cs104/360project1/code/task3/BinaryNetwork.h
 

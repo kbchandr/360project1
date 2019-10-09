@@ -4,7 +4,7 @@
 #include <random>
 #include <iomanip>      // std::setprecision
 
-double generateRandomWeight(){
+double DigitFeedForwardNetwork2::generateRandomWeight(){
 	double random = (rand() % 101 - 50) * 1.0 / 100;
 		while(random == 0){
 			random = (rand() % 101 - 50) * 1.0 / 100;
@@ -189,7 +189,7 @@ void DigitFeedForwardNetwork2::train(const vector< vector< double > >& x,
 			expectedOutput[(int)y[example]] = 1;
 
 			int predictedOutputIndex = 0;
-			for(int i = 1; i < outputLayerSize; i++){
+			for(size_t i = 1; i < outputLayerSize; i++){
 				if(activationInput[numHiddenLayers+1][i] > activationInput[numHiddenLayers+1][predictedOutputIndex]){
 					predictedOutputIndex = i;
 				}
@@ -240,7 +240,7 @@ void DigitFeedForwardNetwork2::test(const vector< vector< double > >& x,
 		expectedOutput[(int)y[example]] = 1;
 
 		int predictedOutputIndex = 0;
-		for(int i = 1; i < outputLayerSize; i++){
+		for(size_t i = 1; i < outputLayerSize; i++){
 			if(activationInput[numHiddenLayers+1][i] > activationInput[numHiddenLayers+1][predictedOutputIndex]){
 				predictedOutputIndex = i;
 			}

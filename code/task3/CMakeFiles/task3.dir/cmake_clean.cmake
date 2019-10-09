@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/task3.dir/main.cpp.o"
-  "CMakeFiles/task3.dir/DigitFeedForwardNetwork.cpp.o"
+  "CMakeFiles/task3.dir/BinaryNetwork.cpp.o"
   "CMakeFiles/task3.dir/DigitFeedForwardNetwork2.cpp.o"
   "task3.pdb"
   "task3"

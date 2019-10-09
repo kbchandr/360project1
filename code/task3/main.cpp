@@ -3,6 +3,7 @@
 
 #include "MNIST_reader.h"
 #include "DigitFeedForwardNetwork2.h"
+#include "BinaryNetwork.h"
 
 using namespace std;
 int main()
@@ -41,7 +42,8 @@ int main()
 
 	cout << "Number of labels: " << double_labels.size() << endl;
 
-	DigitFeedForwardNetwork2 nn(alpha, hiddenLayerSize, numHiddenLayers, inputLayerSize, outputSize);
+	BinaryNetwork nn(alpha, hiddenLayerSize, numHiddenLayers, inputLayerSize, outputSize);
+	// DigitFeedForwardNetwork2 nn(alpha, hiddenLayerSize, numHiddenLayers, inputLayerSize, outputSize);
 	nn.initialize(seed);
 	nn.train(scaled_training, double_labels, numEpochs);
 
