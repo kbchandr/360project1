@@ -136,7 +136,7 @@ void BinaryNetwork::train(const vector< vector< double > >& x,
 		double trainLoss= 0;
 		double valLoss = 0;
 		// print
-		cout << "epoch = " << epoch << " ";
+		// cout << "epoch = " << epoch << " ";
 		for (size_t example = 0; example < 4000; example++)
 		{
 			// propagate the inputs forward to compute the outputs 
@@ -209,11 +209,10 @@ void BinaryNetwork::train(const vector< vector< double > >& x,
 				correctValSamples++;
 			}
 		}
-		cout << "Training Accuracy: "<< correctTrainSamples/totalTrainSamples<<endl;
-		cout << "Validation Accuracy: "<<correctValSamples/totalValSamples <<endl;
-		cout << "Training Loss: "<< trainLoss/totalTrainSamples<<endl;
-		cout << "Validation Loss: "<<valLoss/totalValSamples <<endl;
-		cout << endl;
+		// cout << "Training Accuracy: "<< correctTrainSamples/totalTrainSamples<<endl;
+		// cout << "Validation Accuracy: "<<correctValSamples/totalValSamples <<endl;
+		cout << trainLoss/totalTrainSamples<<", ";
+		cout <<valLoss/totalValSamples <<endl;
 
 	}
 

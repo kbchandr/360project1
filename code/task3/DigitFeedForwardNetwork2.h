@@ -29,10 +29,10 @@ private:
 	size_t outputLayerSize;
 
 	//sigmoid
-	// inline double g(double x) {return 1.0 / (1.0 + exp(-x)); }
-	// inline double gprime(double y) {return y * (1 - y); }
+	inline double g(double x) {return 1.0 / (1.0 + exp(-x)); }
+	inline double gprime(double y) {return y * (1 - y); }
 
 	//tanh
-	inline double g(double x) {return (exp(x)-exp(-x))/ (exp(x)+exp(-x)); }
-	inline double gprime(double y) {return 1- (g(y) *g(y)); }
+	// inline double g(double x) {return (exp(x)-exp(-x))/ (exp(x)+exp(-x)); }
+	// inline double gprime(double y) {return 1- (g(y) *g(y)); }
 };

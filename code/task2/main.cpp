@@ -28,7 +28,6 @@ int main()
 	x[3].push_back(1);
 	vector< double > y{ 0, 1, 1, 0 };
 
-
 	SimpleFeedForwardNetwork nn(alpha, hiddenLayerSize, inputLayerSize);
 	nn.initialize(seed);
 

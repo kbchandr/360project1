@@ -1,5 +1,6 @@
 #include <vector>
 #include <iostream>
+#include <time.h>
 
 #include "MNIST_reader.h"
 #include "DigitFeedForwardNetwork2.h"
@@ -45,8 +46,11 @@ int main()
 	// BinaryNetwork nn(alpha, hiddenLayerSize, numHiddenLayers, inputLayerSize, outputSize);
 	DigitFeedForwardNetwork2 nn(alpha, hiddenLayerSize, numHiddenLayers, inputLayerSize, outputSize);
 	nn.initialize(seed);
-	nn.train(scaled_training, double_labels, numEpochs);
+		clock_t t=clock();
 
+	nn.train(scaled_training, double_labels, numEpochs);
+	clock_t s = clock();
+	cout <<(float)(s-t)/CLOCKS_PER_SEC;
 
 	filename = "t10k-images.idx3-ubyte";
 	vector <vector< int > > testing_images;

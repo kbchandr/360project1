@@ -59,6 +59,8 @@ vector
 -
 iostream
 -
+time.h
+-
 MNIST_reader.h
 /home/cs104/360project1/code/task3/MNIST_reader.h
 DigitFeedForwardNetwork2.h
