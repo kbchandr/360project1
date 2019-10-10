@@ -6,9 +6,9 @@
 
 #IncludeRegexTransform: 
 
-/home/cs104/Documents/360project1/code/task2/SimpleFeedForwardNetwork.cpp
+/home/cs104/360project1/code/task2/SimpleFeedForwardNetwork.cpp
 SimpleFeedForwardNetwork.h
-/home/cs104/Documents/360project1/code/task2/SimpleFeedForwardNetwork.h
+/home/cs104/360project1/code/task2/SimpleFeedForwardNetwork.h
 iostream
 -
 random
@@ -16,17 +16,19 @@ random
 iomanip
 -
 
-/home/cs104/Documents/360project1/code/task2/SimpleFeedForwardNetwork.h
+/home/cs104/360project1/code/task2/SimpleFeedForwardNetwork.h
 math.h
 -
 vector
 -
 
-/home/cs104/Documents/360project1/code/task2/main.cpp
+/home/cs104/360project1/code/task2/main.cpp
 vector
 -
 iostream
 -
+time.h
+-
 SimpleFeedForwardNetwork.h
-/home/cs104/Documents/360project1/code/task2/SimpleFeedForwardNetwork.h
+/home/cs104/360project1/code/task2/SimpleFeedForwardNetwork.h
 

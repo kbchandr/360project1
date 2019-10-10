@@ -42,8 +42,8 @@ int main()
 
 	cout << "Number of labels: " << double_labels.size() << endl;
 
-	BinaryNetwork nn(alpha, hiddenLayerSize, numHiddenLayers, inputLayerSize, outputSize);
-	// DigitFeedForwardNetwork2 nn(alpha, hiddenLayerSize, numHiddenLayers, inputLayerSize, outputSize);
+	// BinaryNetwork nn(alpha, hiddenLayerSize, numHiddenLayers, inputLayerSize, outputSize);
+	DigitFeedForwardNetwork2 nn(alpha, hiddenLayerSize, numHiddenLayers, inputLayerSize, outputSize);
 	nn.initialize(seed);
 	nn.train(scaled_training, double_labels, numEpochs);
 

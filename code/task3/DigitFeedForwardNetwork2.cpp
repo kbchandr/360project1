@@ -255,10 +255,5 @@ void DigitFeedForwardNetwork2::test(const vector< vector< double > >& x,
 
 	cout << endl;
 	cout << "Test Accuracy: "<< correctTestSamples/totalTestSamples<<endl;
-
-
-	
-
-
 	return;
 }
